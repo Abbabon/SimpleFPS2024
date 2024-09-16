@@ -767,6 +767,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8723259979052497917}
   - component: {fileID: 7200497580146474162}
+  - component: {fileID: 1574581785275408443}
   - component: {fileID: 1607678336253408907}
   m_Layer: 0
   m_Name: Dwarf
@@ -814,6 +815,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1574581785275408443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3322651898418175695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 384c5926970343a3aaee60836e7a5eee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _navMeshAgent: {fileID: 1607678336253408907}
 --- !u!195 &1607678336253408907
 NavMeshAgent:
   m_ObjectHideFlags: 0

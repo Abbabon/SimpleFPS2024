@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Utils;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
     [Header("References")]
     [SerializeField] private Transform _playerBody;
