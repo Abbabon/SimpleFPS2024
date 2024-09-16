@@ -5,12 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - GasTank
-  - Target
-  - Concrete
-  - Metal
-  - ExplosiveBarrel
   - Weapon
+  - Geometry
   layers:
   - Default
   - TransparentFX

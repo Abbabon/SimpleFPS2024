@@ -38,6 +38,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
     private void SpawnEnemy()
     {
         var newEnemy = _enemyPool.Get();
+        newEnemy.Reset();
         var randomSpawnLocation = _spawnLocations[UnityEngine.Random.Range(0, _spawnLocations.Count)];
         newEnemy.transform.position = randomSpawnLocation.transform.position;
     }
