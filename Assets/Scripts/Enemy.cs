@@ -8,9 +8,19 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private int _initialHealth = 3;
+    [SerializeField] private GameObject _virtualCamera;
+
+    public GameObject VirtualCamera => _virtualCamera;
+    public bool Alive => _alive;
     
     private int _currentHealth;
     private bool _alive = true;
+
+    private void Awake()
+    {
+        _virtualCamera.SetActive(false);
+        EnemySpawner.Instance.RegisterEnemy(this);
+    }
 
     public void Reset()
     {
@@ -41,5 +51,6 @@ public class Enemy : MonoBehaviour
         _navMeshAgent.isStopped = true;
         _alive = false;
         _animator.SetBool("Dead", true);
+        EnemySpawner.Instance.UnregisterEnemy(this);
     }
 }

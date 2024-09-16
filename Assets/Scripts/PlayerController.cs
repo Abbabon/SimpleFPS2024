@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,6 +49,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         SetCursorState(true);
         _cooldownWaitForSeconds = new WaitForSeconds(_fireCooldownTime);
+        AudioController.Instance.PlaySound(SoundType.PullWeapon);
     }
 
     private void SetCursorState(bool state)
@@ -130,6 +130,7 @@ public class PlayerController : Singleton<PlayerController>
         if (_isGrounded && Input.GetButtonDown("Jump"))
         {
             _velocity.y = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
+            AudioController.Instance.PlaySound(SoundType.Jump);
         }
     }
     
@@ -150,6 +151,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Fire()
     {
+        AudioController.Instance.PlaySound(SoundType.Shoot);
         HandleRaycastBullet();
         HandleRecoil();
         HandleMuzzleFlash();
@@ -189,6 +191,7 @@ public class PlayerController : Singleton<PlayerController>
             //TODO: extract to game manager, multiple HP damage
             hit.transform.GetComponent<Enemy>()?.TakeDamage(1);
         }
+        AudioController.Instance.PlaySound(SoundType.Hit);
     }
 
     private IEnumerator FireCooldown()

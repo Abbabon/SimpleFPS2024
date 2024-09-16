@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Utils;
 
@@ -11,6 +11,8 @@ public class EnemySpawner : Singleton<EnemySpawner>
     [SerializeField] private float _spawnCooldown;
     [SerializeField] private Enemy _enemyObjectPool;
     [SerializeField] private List<SpawnLocation> _spawnLocations;
+    
+    private List<Enemy> _activeEnemies = new();
     
     private WaitForSeconds _spawnCooldownWaitForSeconds;
     private BestObjectPool<Enemy> _enemyPool;
@@ -51,5 +53,20 @@ public class EnemySpawner : Singleton<EnemySpawner>
     public void EnableEnemySpawns()
     {
         _enabled = true;
+    }
+
+    public void RegisterEnemy(Enemy enemy)
+    {
+        _activeEnemies.Add(enemy);
+    }
+    
+    public void UnregisterEnemy(Enemy enemy)
+    {
+        _activeEnemies.Remove(enemy);
+    }
+    
+    public GameObject GetPOVCamera()
+    {
+        return _activeEnemies.FirstOrDefault()?.VirtualCamera;
     }
 }
