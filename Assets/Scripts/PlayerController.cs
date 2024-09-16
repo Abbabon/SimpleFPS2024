@@ -25,6 +25,7 @@ public class PlayerController : Singleton<PlayerController>
     private bool _isGrounded;
     private Coroutine _fireCooldown;
     private WaitForSeconds _cooldownWaitForSeconds;
+    private bool _currentCusrorState;
 
     private void Start()
     {
@@ -36,16 +37,31 @@ public class PlayerController : Singleton<PlayerController>
     {
         Cursor.lockState = state ? CursorLockMode.Locked : CursorLockMode.None;
         Cursor.visible = !state;
+        _currentCusrorState = state;
     }
 
     void Update()
     {
+        CheckCursorState();
         CheckGrounded();
         Look();
         MoveOnPlane();
         Jump();
         Gravity();
         HandleFireButton();
+    }
+
+    private void CheckCursorState()
+    {
+        if (_currentCusrorState && Input.GetKeyDown(KeyCode.Escape))
+        {
+            SetCursorState(false);
+        }
+        
+        if (!_currentCusrorState && Input.GetMouseButtonDown(0))
+        {
+            SetCursorState(true);
+        }
     }
 
     private void CheckGrounded()
@@ -59,6 +75,9 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Look()
     {
+        if (!_currentCusrorState)
+            return;
+        
         var xMouseDelta = Input.GetAxis("Mouse X") * _mouseSensitivity * Time.deltaTime;
         var yMouseDelta = Input.GetAxis("Mouse Y") * _mouseSensitivity * Time.deltaTime;
         
